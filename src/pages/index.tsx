@@ -16,7 +16,7 @@ function Home(props: Props) {
       <Container maxW="container.xl">
         <Flex
           as="section"
-          h="85vh"
+          h="80vh"
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
