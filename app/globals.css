@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-heading: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* Flaves palette, beyond the shadcn tokens */
+  --color-copy: var(--copy);
+  --color-faint: var(--faint);
+  --color-dim: var(--dim);
+  --color-placeholder: var(--placeholder);
+  --color-field: var(--field);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-dashed: var(--line-dashed);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --animate-ping-slow: ping-slow 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  --animate-breathe: breathe 1.8s ease-in-out infinite alternate;
+
+  @keyframes breathe {
+    from {
+      opacity: 0.6;
+    }
+    to {
+      opacity: 0.25;
+    }
+  }
+
+  @keyframes ping-slow {
+    75%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+}
+
+/* The site is dark only: one palette, no light/dark switch. */
+:root {
+  color-scheme: dark;
+
+  --background: #0a0a0a;
+  --foreground: #f3f1ea;
+  --card: #0e0e0e;
+  --card-foreground: #f3f1ea;
+  --popover: #121212;
+  --popover-foreground: #f3f1ea;
+  --primary: #ffb22c;
+  --primary-foreground: #0a0a0a;
+  --secondary: #121212;
+  --secondary-foreground: #f3f1ea;
+  --muted: #121212;
+  --muted-foreground: #9a968c;
+  --accent: #1a1a1a;
+  --accent-foreground: #f3f1ea;
+  --destructive: #ff6b5b;
+  --border: #1f1f1f;
+  --input: #2e2e2e;
+  --ring: #ffb22c;
+  --radius: 0.25rem;
+
+  --copy: #b8b4aa;
+  --faint: #7f7b72;
+  --dim: #5c5953;
+  --placeholder: #6f6c65;
+  --field: #121212;
+  --line: #262626;
+  --line-strong: #2e2e2e;
+  --line-dashed: #3a3a3a;
+  --dot: #2a2a2a;
+  --dot-fill: #3a3a3a;
+}
+
+/* 16px dot grid behind the hero and the early-access block */
+@utility dot-grid {
+  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1.3px);
+  background-size: 16px 16px;
+}
+
+/* Fine dot texture inside a shot thumbnail */
+@utility dot-fill {
+  background-image: radial-gradient(
+    circle,
+    var(--dot-fill) 1.1px,
+    transparent 1.4px
+  );
+  background-size: 9px 9px;
+}
+
+/* Accent dots that "light up" a generated shot */
+@utility dot-glow {
+  background-image: radial-gradient(
+    circle,
+    var(--primary) 1.2px,
+    transparent 1.5px
+  );
+  background-size: 9px 9px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-background font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

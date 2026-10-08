@@ -1,0 +1,146 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!.next", "!next-env.d.ts"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "linter": {
+    "enabled": true,
+    // Strict: every stable rule, plus the domains this stack uses.
+    "domains": {
+      "next": "all",
+      "react": "all",
+      "project": "all",
+      "tailwind": "all",
+      "solid": "none",
+      "qwik": "none",
+      "svelte": "none",
+      "astro": "none",
+      "reactNative": "none",
+      "drizzle": "none",
+      "playwright": "none"
+    },
+    "rules": {
+      "preset": "all",
+      "correctness": {
+        // Bundler module resolution: imports carry no extension.
+        "useImportExtensions": "off",
+        // TypeScript already resolves every import, and this rule misreads
+        // the `export =` in @types/react.
+        "noUnresolvedImports": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "fix": "safe",
+          "options": { "functions": ["cn", "cva"] }
+        }
+      },
+      "performance": {
+        // `import * as m from "motion/react-m"` is Motion's API for LazyMotion.
+        "noNamespaceImport": "off",
+        // The React Compiler memoizes callbacks passed as props.
+        "noJsxPropsBind": "off"
+      },
+      "security": {
+        // False positives on long Tailwind class strings.
+        "noSecrets": "off"
+      },
+      "style": {
+        // Conflicts with `noLeakedRender`, which asks for ternaries in JSX.
+        "noTernary": "off",
+        // Static marketing copy, no i18n layer.
+        "noJsxLiterals": "off",
+        // Animation timings and layout values read better inline.
+        "noMagicNumbers": "off",
+        // The palette is defined once, in hex, in app/globals.css.
+        "noHexColors": "off",
+        // `<input required />` and `<Stagger inView />` are idiomatic JSX.
+        "noImplicitBoolean": "off",
+        // Components sit next to the small helpers they use.
+        "useExportsLast": "off",
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": { "style": "type" }
+        },
+        "useComponentExportOnlyModules": {
+          "level": "error",
+          "options": {
+            // Route segment config and metadata exports Next.js reads.
+            "allowExportNames": [
+              "metadata",
+              "viewport",
+              "ensureStatic",
+              "alt",
+              "size",
+              "contentType"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "overrides": [
+    {
+      // Next.js file conventions require default exports.
+      "includes": ["app/**", "next.config.ts"],
+      "linter": {
+        "rules": {
+          "style": { "noDefaultExport": "off" }
+        }
+      }
+    },
+    {
+      // Keys dictated by external formats: Web App Manifest, schema.org.
+      "includes": ["app/manifest.ts", "components/site/json-ld.tsx"],
+      "linter": {
+        "rules": {
+          "style": { "useNamingConvention": "off" }
+        }
+      }
+    },
+    {
+      // shadcn/ui sources: kept close to upstream so `shadcn add` can update them.
+      "includes": ["components/ui/**", "lib/utils.ts"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noLabelWithoutControl": "off",
+            "useSemanticElements": "off"
+          },
+          "performance": { "noBarrelFile": "off" },
+          "style": { "useComponentExportOnlyModules": "off" },
+          "suspicious": { "noArrayIndexKey": "off" }
+        }
+      }
+    }
+  ]
+}

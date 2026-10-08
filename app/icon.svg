@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Flaves</title>
+  <rect width="100" height="100" rx="18.75" fill="#0A0A0A"/>
+  <g fill="#FFB22C" transform="translate(21.43 10) scale(2.857)">
+    <circle cx="2" cy="2" r="1.7"/><circle cx="6" cy="2" r="1.7"/><circle cx="10" cy="2" r="1.7"/><circle cx="14" cy="2" r="1.7"/><circle cx="18" cy="2" r="1.7"/>
+    <circle cx="2" cy="6" r="1.7"/><circle cx="2" cy="10" r="1.7"/>
+    <circle cx="2" cy="14" r="1.7"/><circle cx="6" cy="14" r="1.7"/><circle cx="10" cy="14" r="1.7"/><circle cx="14" cy="14" r="1.7"/>
+    <circle cx="2" cy="18" r="1.7"/><circle cx="2" cy="22" r="1.7"/><circle cx="2" cy="26" r="1.7"/>
+  </g>
+</svg>
